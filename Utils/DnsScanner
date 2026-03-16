@@ -1,3 +1,53 @@
-public class DnsScanner{
+using System.Net;
 
+public class DnsScanner
+{
+    private readonly string _domain;
+
+    public DnsScanner(string domain)
+    {
+        _domain = domain;
+    }
+
+    public async Task ScanAsync(IEnumerable<string> words, int concurrency = 50)
+    {
+        using var semaphore = new SemaphoreSlim(concurrency);
+
+        var tasks = words.Select(async word =>
+        {
+            await semaphore.WaitAsync();
+            try
+            {
+                await TestSubdomainAsync(word);
+            }
+            finally
+            {
+                semaphore.Release();
+            }
+        });
+
+        await Task.WhenAll(tasks);
+    }
+
+    private async Task TestSubdomainAsync(string word)
+    {
+        string host = $"{word}.{_domain}";
+
+        try
+        {
+            var addresses = await Dns.GetHostAddressesAsync(host);
+
+            if (addresses.Length > 0)
+            {
+                Color.Write("[DNS] ", ConsoleColor.Cyan);
+                Color.Write(host, ConsoleColor.Green);
+                Color.Write(" → ", ConsoleColor.DarkGray);
+                Color.WriteLine(string.Join(", ", addresses.Select(a => a.ToString())), ConsoleColor.White);
+            }
+        }
+        catch
+        {
+            // Pas de résolution → on ignore
+        }
+    }
 }
