@@ -36,32 +36,42 @@ public class DirScanner
         await Task.WhenAll(tasks);
     }
 
-    private async Task TestPathAsync(string word)
+
+/*
+* Retourne les liens sauf 404.
+*/
+private async Task TestPathAsyncWithout404(string word)
+{
+    var url = $"{_baseUrl}/{word}";
+
+    try
     {
-        var url = $"{_baseUrl}/{word}";
+        var response = await _client.GetAsync(url);
+        var code = (int)response.StatusCode;
 
-        try
+        // On ignore uniquement 404
+        if (code == 404)
+            return;
+
+        // Choix de la couleur
+        ConsoleColor color = code switch
         {
-            var response = await _client.GetAsync(url);
-            var code = response.StatusCode;
+            200 => ConsoleColor.Green,
+            301 or 302 => ConsoleColor.Yellow,
+            403 => ConsoleColor.Red,
+            >= 500 => ConsoleColor.Magenta,
+            _ => ConsoleColor.Cyan
+        };
 
-            // Aucun filtre → logique par défaut (comme Gobuster)
-            if (_allowedCodes.Count == 0)
-            {
-                if ((int)code >= 200 && (int)code < 400)
-                    Console.WriteLine($"[{(int)code}] {url}");
-                return;
-            }
-
-            // Filtre actif → n’afficher que les codes autorisés
-            if (_allowedCodes.Contains(code))
-            {
-                Console.WriteLine($"[{(int)code}] {url}");
-            }
-        }
-        catch
-        {
-            // On ignore les erreurs réseau
-        }
+        Color.Write("[", ConsoleColor.DarkGray);
+        Color.Write(code.ToString(), color);
+        Color.Write("] ", ConsoleColor.DarkGray);
+        Color.WriteLine(url, ConsoleColor.White);
     }
+    catch
+    {
+        // On ignore les erreurs réseau
+    }
+}
+
 }
