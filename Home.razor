@@ -1,0 +1,110 @@
+
+
+document.write(`
+  
+<html>
+<head>
+<body>
+<header>HexHackFr</header>
+
+<!-- Menu -->
+<div id="menuMaster">
+<ul id="menu">
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3</li>
+<li>Item 4</li>
+<li>Item 5</li>
+<li>Item 6</li>
+</ul>
+</div>
+
+<div id="content">
+							 
+    <div class="art">
+        <div class="title">Tuto C#</div>
+				    <div class="contentart">
+							
+							 Lorem ipsum is placeholder text used in design, publishing, and UI/UX work to
+							 fill space before the real content is ready. 
+							 It helps teams focus on layout, typography, and visual hierarchy 
+							 without being distracted by meaningful words
+							
+							 </div>			 
+    </div>
+							 
+    <div class="art">
+        <div class="title">Tuto C#</div>
+				    <div class="contentart">
+							 <pre>
+							 Lorem ipsum is placeholder text used in design, publishing, and UI/UX work to
+							 fill space before the real content is ready. 
+							 It helps teams focus on layout, typography, and visual hierarchy 
+							 without being distracted by meaningful words
+							 </pre>
+							 </div>			 
+    </div>
+
+							     <div class="art">
+        <div class="title">Tuto C#</div>
+				    <div class="contentart">
+							 <pre>
+							 Lorem ipsum is placeholder text used in design, publishing, and UI/UX work to
+							 fill space before the real content is ready. 
+							 It helps teams focus on layout, typography, and visual hierarchy 
+							 without being distracted by meaningful words
+							 </pre>
+							 </div>			 
+    </div>
+							 
+</div>
+
+<style>
+body{
+    background-color:#f0f0f0;
+    margin:0;
+    font-family:Arial, sans-serif;
+}
+
+li{list-style-type:none}
+
+header{
+  line-height:40px;
+  height:40px;
+  text-align:center;
+  background-color:#5e5e5e;
+  color:white;
+}
+
+#menuMaster{height:40px;line-height:40px;width:1200px;margin:auto;margin-bottom:50px;}
+#menu li{display:inline-block;width:150px;height:40px;line-height:50px;text-align:center;}
+#menu li:hover{border-bottom:3px solid blue;cursor:pointer;}
+#content{width:1400px;margin:auto;min-height:500px;}
+.art{box-shadow:0 2px 8px rgba(0,0,0,0.15);margin-bottom:20px;}
+
+ .art:nth-child(even){
+     float:left;	 	
+}
+
+  .art:nth-child(odd){
+    float:right;		
+}   
+
+.contentart:nth-child(even){
+   float:right;
+}
+
+.contentart:nth-child(odd){
+   float:left;
+}
+							 
+               
+</style>
+
+</body>
+</html>
+
+
+     `);
+
+
