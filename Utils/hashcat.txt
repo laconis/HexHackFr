@@ -1,0 +1,25 @@
+##########################################################################################################################################################
+
+echo "bobleponge:1000:aad3b435b51404eeaad3b435b51404ee:000828b35b1f1178bec1772f49d2a460:::" > secret2
+
+└─$ hashcat -m 1000 secret2  ./rockyou.txt
+hashcat (v7.1.2) starting
+
+OpenCL API (OpenCL 3.0 PoCL 6.0+debian  Linux, None+Asserts, RELOC, SPIR-V, LLVM 18.1.8, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+====================================================================================================================================================
+* Device #01: cpu-haswell-AMD Ryzen 3 4100 4-Core Processor, 740/1480 MB (256 MB allocatable), 1MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+INFO: All hashes found as potfile and/or empty entries! Use --show to display them.
+      For more information, see https://hashcat.net/faq/potfile
+
+Started: Mon Mar 30 00:54:27 2026
+Stopped: Mon Mar 30 00:54:28 2026
+                                      
+└─$ cat secret2
+bobleponge:1000:aad3b435b51404eeaad3b435b51404ee:000828b35b1f1178bec1772f49d2a460:::
+
+##########################################################################################################################################################
+
