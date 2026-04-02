@@ -110,12 +110,23 @@ Cela signifie :
 /////////////////////////////   SFTP  //////////////////
 
 
+ Stockage de mots de passe (avec précautions)
+
+On ne stocke jamais un mot de passe en clair, mais un hash.
+⚠️ Aujourd’hui, on préfère bcrypt, argon2, scrypt pour les mots de passe, car SHA‑256 est trop rapide.
 
 
 
+// ENCODAGE SHA256 // 
+
+echo -n "texte" | sha256sum  OU  Get-FileHash fichier.txt -Algorithm SHA256
+
+# PYTHON 
+import hashlib
+hashlib.sha256(b"texte").hexdigest()
 
 
-
+// ENCODAGE SHA256 // 
 
 
 
