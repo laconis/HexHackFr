@@ -165,7 +165,67 @@ Which path has the faster physical connection? I.e. is one path using a copper c
 At this layer, everything is dealt with via IP addresses such as 192.168.1.100. Devices such as routers capable of delivering packets using IP addresses are known as Layer 3 devices — because they are capable of working at the third layer of the OSI model.
 
 
+-------------------------------------------------------------------------------
 
+TCP (ou  Protocole de Contrôle  de Transmission  en abrégé ) est une autre de ces règles utilisées dans la mise en réseau.
+
+
+
+Ce protocole est très similaire au modèle OSI que nous avons déjà abordé dans la salle trois de ce module.TCPLe protocole IP se compose de quatre couches et constitue en quelque sorte une version simplifiée du modèle OSI. Ces couches sont :
+
+Application
+Transport
+Internet
+Interface réseau
+
+
+De manière très similaire au fonctionnement du modèle OSI, des informations sont ajoutées à chaque couche duTCPLe modèle est appliqué au fur et à mesure que les données (ou paquets) le traversent. Comme vous vous en souvenez peut-être, ce processus est appelé encapsulation ; son inverse est la décapsulation.
+
+
+
+Une caractéristique déterminante deTCPc'est qu'il est  basé sur la connexion , ce qui signifie queTCPIl est nécessaire d'établir une connexion entre un client et un périphérique faisant office de serveur  avant  l'envoi des données.
+
+
+
+À cause de ça,TCPgarantit que toutes les données envoyées seront reçues à destination. Ce processus est appelé la poignée de main en trois temps, que nous aborderons plus en détail prochainement.  Un tableau comparant les avantages et les inconvénients deTCPse trouve ci-dessous :
+
+
+
+Avantages deTCP	Inconvénients deTCP
+Garantit leintégritédonnées.	Nécessite une connexion fiable entre les deux appareils. Si un fragment de données n'est pas reçu, le fragment entier est inutilisable et doit être renvoyé.
+Capable de synchroniser deux appareils pour éviter que l'autre ne soit inondé de données dans le désordre.	Une connexion lente peut saturer un autre appareil, car la connexion sera réservée sur cet autre appareil pendant toute la durée de l'opération.
+Effectue beaucoup plus de processus pour plus de fiabilité	TCPest nettement plus lent queUDPcar davantage de travail (calcul) doit être effectué par les appareils utilisant ce protocole.
+
+
+TCPLes paquets contiennent diverses sections d'information appelées en-têtes, ajoutées lors de l'encapsulation. Voici quelques-uns des en-têtes essentiels, présentés dans le tableau ci-dessous :
+
+
+
+En-tête	Description
+Port source	Cette valeur correspond au port ouvert par l'expéditeur pour envoyer le message.TCPpaquet provenant de. Cette valeur est choisie au hasard (parmi les ports de 0 à 65535 qui ne sont pas déjà utilisés à ce moment-là).
+Port de destination	Cette valeur correspond au numéro de port sur lequel une application ou un service s'exécute sur l'hôte distant (celui qui reçoit les données) ; par exemple, un serveur web fonctionnant sur le port 80. Contrairement au port source, cette valeur n'est pas choisie au hasard.
+Adresse IP source	Il s'agit de l'adresse IP du périphérique qui envoie le paquet.
+Adresse IP de destination	Il s'agit de l'adresse IP du périphérique auquel le paquet est destiné.
+Numéro de séquence	Lors de l'établissement d'une connexion, la première donnée transmise se voit attribuer un nombre aléatoire. Nous expliquerons cela plus en détail ultérieurement.
+Numéro d'accusé de réception	Une fois qu'une donnée a reçu un numéro de séquence, le numéro de la donnée suivante sera incrémenté de 1. Nous expliquerons cela plus en détail ultérieurement.
+Somme de contrôle	C'est cette valeur qui donneTCP intégritéUn calcul mathématique est effectué et le résultat est mémorisé. Lorsque le dispositif de réception effectue ce calcul, les données sont nécessairement corrompues si le résultat diffère de la donnée envoyée.
+Données	C'est dans cet en-tête que sont stockées les données, c'est-à-dire les octets d'un fichier en cours de transmission.
+Drapeau	Cet en-tête détermine comment le paquet doit être traité par chaque appareil lors de la procédure d'établissement de liaison. Des indicateurs spécifiques déterminent des comportements spécifiques, que nous expliquerons plus loin.
+
+Nous aborderons ensuite  la procédure d'établissement d'une connexion entre deux appareils, appelée «  poignée de main en trois étapes »  . Cette procédure utilise quelques messages spécifiques, dont les principaux sont présentés dans le tableau ci-dessous :
+
+
+
+Étape	Message	Description
+1	SYN	Un message SYN est le paquet initial envoyé par un client lors de la prise de contact. Ce paquet sert à établir une connexion et à synchroniser les deux appareils (nous y reviendrons plus en détail ultérieurement).
+2	SYN/ACK	Ce paquet est envoyé par le périphérique de réception (serveur) pour accuser réception de la tentative de synchronisation du client.
+3	ACK	Le paquet d'accusé de réception peut être utilisé par le client ou le serveur pour confirmer la bonne réception d'une série de messages/paquets.
+4	DONNÉES	Une fois la connexion établie, les données (telles que les octets d'un fichier) sont envoyées via le message « DATA ».
+5	AILETTE	Ce paquet est utilisé pour fermer proprement (correctement) la connexion une fois celle-ci terminée.
+#	RST	Ce paquet interrompt brutalement toute communication. Il s'agit d'une mesure de dernier recours, indiquant un problème survenu lors du processus. Par exemple, si le service ou l'application ne fonctionne pas correctement, ou si le système présente des défaillances telles qu'une insuffisance de ressources. 
+Le schéma ci-dessous illustre un processus d'échange de données en trois étapes entre Alice et Bob. En pratique, cela se ferait entre deux appareils.
+
+-------------------------------------------------------
 
 
 
