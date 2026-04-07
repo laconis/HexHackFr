@@ -129,11 +129,40 @@ hashlib.sha256(b"texte").hexdigest()
 // ENCODAGE SHA256 // 
 
 
+Adresses MAC
+
+Chaque périphérique connecté à un réseau possède une interface réseau physique, une carte à microprocesseur située sur sa carte mère. Cette interface réseau se voit attribuer une adresse unique lors de sa fabrication : l’ adresse MAC ( Media Access Control ) . L’adresse MAC est un nombre hexadécimal de douze caractères ( un système de numération en base seize utilisé en informatique) divisé en deux groupes de deux , séparés par des deux-points. Ces deux-points servent de séparateurs. Par exemple : a4:c3:f0:85:ac:2d . Les six premiers caractères représentent le fabricant de l’interface réseau, et les six derniers constituent un numéro unique.
+
+
+Pour rappel, comme nous l'avons vu dans nos tâches précédentes, les appareils peuvent avoir deux identifiants : une adresse MAC et une adresse IP. Le protocole de résolution d'adresses ( Address Resolution Protocol)ARP En résumé, il s'agit de la technologie qui permet aux appareils de s'identifier sur un réseau.
+
+Simplement,ARPPermet à un appareil d'associer son adresse MAC à une adresse IP sur le réseau. Chaque appareil du réseau conserve un historique des adresses MAC associées aux autres appareils.
+
+Lorsque des appareils souhaitent communiquer entre eux, ils envoient un message à l'ensemble du réseau à la recherche de l'appareil en question. Les appareils peuvent utiliserARPpour trouver l'adresse MAC (et donc l'identifiant physique) d'un appareil de communication.
+
+Comment ça marcheARPTravail?
+
+Chaque appareil au sein d'un réseau possède un registre pour stocker des informations, appelé cache. Dans le contexte deARPCe cache stocke les identifiants des autres appareils du réseau.
+
+Afin de faire correspondre ces deux identifiants (adresse IP et adresse MAC),ARPenvoie deux types de messages :
+
+ARPDemande
+ARPRépondre
+Lorsqu'unARPUne requête est envoyée, un message est diffusé sur le réseau aux autres appareils demandant : « Quelle est l’adresse MAC associée à cette adresse IP ? » Lorsque les autres appareils reçoivent ce message, ils ne répondront que s’ils sont propriétaires de cette adresse IP et enverront une réponse.ARPL'appareil demandeur peut alors mémoriser cette correspondance et la stocker dans sa mémoire .ARPcache pour une utilisation ultérieure.
 
 
 
 
 
+
+The third layer of the OSI model (network layer) is where the magic of routing & re-assembly of data takes place (from these small chunks to the larger chunk). Firstly, routing simply determines the most optimal path in which these chunks of data should be sent.
+
+Whilst some protocols at this layer determine exactly what is the "optimal" path that data should take to reach a device, we should only know about their existence at this stage of the networking module. Briefly, these protocols include OSPF (Open Shortest Path First) and RIP (Routing Information Protocol). The factors that decide what route is taken is decided by the following:
+
+What path is the shortest? I.e. has the least amount of devices that the packet needs to travel across.
+What path is the most reliable? I.e. have packets been lost on that path before?
+Which path has the faster physical connection? I.e. is one path using a copper connection (slower) or a fibre (considerably faster)?
+At this layer, everything is dealt with via IP addresses such as 192.168.1.100. Devices such as routers capable of delivering packets using IP addresses are known as Layer 3 devices — because they are capable of working at the third layer of the OSI model.
 
 
 
