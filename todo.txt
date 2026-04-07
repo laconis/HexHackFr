@@ -228,6 +228,45 @@ Le schéma ci-dessous illustre un processus d'échange de données en trois éta
 -------------------------------------------------------
 
 
+UNpare-feuUn routeur est un dispositif au sein d'un réseau chargé de déterminer quel trafic est autorisé à entrer et à sortir. Imaginez unpare-feucomme sécurité périmétrique d'un réseau. Un administrateur peut configurer unpare-feuAutoriser   ou  refuser  le trafic entrant ou sortant d'un réseau en fonction de nombreux facteurs tels que :
+
+
+
+D'où vient le trafic ? (a-t-il lepare-feu(m'a-t-on demandé d'accepter/de refuser le trafic provenant d'un réseau spécifique ?)
+Où va le trafic ? (a-t-il lepare-feu(m'a-t-on demandé d'accepter/de refuser le trafic destiné à un réseau spécifique ?)
+À quel port ce trafic est-il destiné ? (a lepare-feuOn m'a demandé d'accepter/refuser uniquement le trafic destiné au port 80 ?
+Quel protocole utilise le trafic ? (a-t-il lepare-feuon m'a demandé d'accepter/refuser le trafic qui estUDP,TCPou les deux ?)
+Les pare-feu effectuent une inspection des paquets pour déterminer les réponses à ces questions.
+
+
+
+
+
+Les pare-feu se présentent sous toutes les formes et toutes les tailles. Des équipements matériels dédiés (souvent utilisés dans les grands réseaux d'entreprise) capables de gérer d'importants volumes de données, aux routeurs résidentiels (comme celui de votre domicile !) ou aux logiciels tels que Snort.(ouvre dans un nouvel onglet)Les pare-feu peuvent être classés en 2 à 5 catégories.
+
+
+
+
+Nous aborderons les deux principales catégories de pare-feu dans le tableau ci-dessous :
+
+
+
+Pare-feuCatégorie	Description
+État	
+Ce type depare-feuutilise l'intégralité des informations d'une connexion ; plutôt que d'inspecter un paquet individuel, cettepare-feudétermine le comportement d'un appareil en fonction de l'ensemble de la connexion .
+
+Cepare-feuCe type de pare-feu consomme beaucoup plus de ressources que les pare-feu sans état, car la prise de décision est dynamique. Par exemple, unpare-feupourrait permettre les premières parties d'unTCPUne poignée de main qui allait par la suite échouer.
+
+Si la connexion provenant d'un hôte est mauvaise, cela bloquera l'ensemble du périphérique.
+
+Apatride	
+Cepare-feuLe type utilise un ensemble de règles statiques pour déterminer si les paquets individuels sont acceptables ou non. Par exemple, si un appareil envoie un paquet incorrect, cela n'entraîne pas nécessairement le blocage de l'ensemble du système.
+
+Bien que ces pare-feu consomment beaucoup moins de ressources que les solutions alternatives, ils sont beaucoup moins performants. Par exemple, leur efficacité dépend entièrement des règles qui y sont définies. Si une règle n'est pas appliquée à la lettre, elle est de fait inutile.
+
+Cependant, ces pare-feu sont très efficaces lorsqu'ils reçoivent d'importants volumes de trafic provenant d'un ensemble d'hôtes (comme lors d'une attaque par déni de service distribué).
+
+
 
 
 
