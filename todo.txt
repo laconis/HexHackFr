@@ -268,7 +268,38 @@ Cependant, ces pare-feu sont très efficaces lorsqu'ils reçoivent d'importants 
 
 
 
+--------------------------
 
+HTTPCodes d'état :
+
+Dans la tâche précédente, vous avez appris que lorsqu'unHTTPLorsque le serveur répond, la première ligne contient toujours un code d'état informant le client du résultat de sa requête et, le cas échéant, de la marche à suivre. Ces codes d'état se répartissent en 5 plages différentes :
+
+100-199 - Réponse à l'information	Ces messages sont envoyés pour informer le client que la première partie de sa demande a été acceptée et qu'il doit continuer à envoyer les autres.reposde leur demande. Ces codes ne sont plus très courants.
+200-299 - Succès	Cette série de codes d'état est utilisée pour indiquer au client que sa demande a abouti.
+300-399 - Redirection	Ces URL servent à rediriger la requête du client vers une autre ressource, qu'il s'agisse d'une autre page web ou d'un autre site web.
+400-499 - Erreurs client	Utilisé pour informer le client qu'une erreur s'est produite avec sa demande.
+500-599 - Erreurs serveur	Ce code est réservé aux erreurs survenant côté serveur et indique généralement un problème assez important au niveau du serveur traitant la requête.
+CommunHTTPCodes d'état :
+
+Il existe de nombreux types différentsHTTPLes codes d'état, sans compter que les applications peuvent définir les leurs, nous allons passer en revue les plus courants.HTTPVoici quelques réponses que vous êtes susceptible de rencontrer :
+
+200 - OK	La requête a été traitée avec succès.
+201 - Créé	Une ressource a été créée (par exemple, un nouvel utilisateur ou un nouvel article de blog).
+301 - Déplacé définitivement	Cela redirige le navigateur du client vers une nouvelle page Web ou indique aux moteurs de recherche que la page a été déplacée et qu'il faut la rechercher à cet endroit.
+302 - Trouvé	Similaire à la redirection permanente ci-dessus, mais comme son nom l'indique, il ne s'agit que d'un changement temporaire et il pourrait être modifié à nouveau prochainement.
+400 - Mauvaise requête	Cela indique au navigateur qu'une erreur ou une donnée manquante s'est produite dans la requête. Ce mécanisme peut s'avérer utile si la ressource du serveur web demandée attendait un paramètre spécifique que le client n'a pas transmis.
+401 - Non autorisé	Vous n'êtes actuellement pas autorisé à consulter cette ressource tant que vous ne vous êtes pas authentifié via l'application web, généralement à l'aide d'un nom d'utilisateur et d'un mot de passe.
+403 - Interdit	Vous n'êtes pas autorisé à consulter cette ressource, que vous soyez connecté ou non.
+405 - Méthode non autorisée	La ressource n'autorise pas ce type de requête ; par exemple, vous envoyez une requête GET à la ressource /create-account alors qu'elle attendait une requête POST.
+404 - Page introuvable	La page/ressource que vous avez demandée n'existe pas.
+500 - Erreur de service interne	Le serveur a rencontré une erreur lors du traitement de votre requête et ne sait pas comment la gérer correctement.
+503 - Service indisponible	
+Ce serveur ne peut pas traiter votre requête car il est soit surchargé, soit en maintenance.
+
+Si vous êtes plutôt visuel, consultez également un excellenthttp.chat(ouvre dans un nouvel onglet)Ressource pour étudier les codes d'état. Cliquez maintenant sur le bouton « Voir le site » à droite pour découvrir certains de ces codes.HTTPLes messages d'état s'affichent comme dans un navigateur.
+
+
+--------------------
 
 
 
