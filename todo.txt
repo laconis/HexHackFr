@@ -302,8 +302,60 @@ Si vous êtes plutôt visuel, consultez également un excellenthttp.chat(ouvre d
 --------------------
 
 
+Dans cette salle, nous avons abordé plusieurs sujets liés à la représentation et au stockage des valeurs numériques dans la mémoire informatique. Nous avons traité des systèmes suivants :
+
+Système décimal (base 10) : C'est le système que nous utilisons dans notre vie quotidienne.
+Système binaire (base 2) : Les ordinateurs comprennent deux états, qui sont codés comme 0et 1.
+Système hexadécimal (base 16) : Chaque groupe de 4 chiffres binaires (bits) peut être représenté par un chiffre hexadécimal. Un chiffre hexadécimal est compris entre 0 0et F16.
+Système octal (base 8) : Chaque groupe de 3 bits peut être représenté par un chiffre octal. Un chiffre octal est compris entre 0 0et 71. Ce système est moins fréquent en informatique.
+De plus, nous avons appris comment une couleur peut être représentée. Nous avons abordé les points suivants :
+
+Bit : C'est l'abréviation de chiffre binaire, et il peut être soit 0 0, soit 1 1.
+Octet : Sur les systèmes modernes, un octet est composé de 8 bits .
+Code hexadécimal : Sur les systèmes informatiques, une couleur est représentée par une combinaison de rouge, de vert et de bleu. Si un octet est attribué à chacune des couleurs primaires (rouge, vert et bleu), on peut obtenir plus de 16 millions de combinaisons de couleurs.
+Dans la salle d'encodage des données , nous explorerons comment les alphabets des différentes langues sont enregistrés. Outre les lettres, nous verrons comment les émojis sont enregistrés sous forme de bits.
 
 
+
+----------------
+
+
+Nous avons appris que l'ASCII est une norme 7 bits définissant 128 caractères, incluant les lettres, les chiffres et la ponctuation de base de l'anglais. Nous avons également constaté que l'ASCII, avec ses sept bits, ne permettait pas d'afficher des caractères tels que ñ, €, あou ب. L'ASCII étendu, utilisant huit bits, a tenté de pallier ce manque grâce à des variantes régionales (ISO-8859-1, ISO-8859-2, Windows-1252, entre autres), mais cela a engendré des problèmes ! Par exemple, si l'expéditeur écrit et enregistre Øun document en utilisant l'encodage ISO 8859-1 (Latin 1) et que le destinataire l'ouvre et le lit en utilisant l'encodage ISO 8859-2 (Latin 2), il verra Ř. Il est donc évident qu'ouvrir un document nécessite d'utiliser le même encodage que celui utilisé lors de son enregistrement ; sinon, certains caractères ne s'afficheront pas correctement, voire, plus déroutant encore, ils risquent d'être incorrectement remplacés.
+
+Contrairement à l'anglais, qui compte 26 lettres et nécessite 52 caractères pour les majuscules et les minuscules, l'arabe requiert plus de 250 caractères pour ses nombreuses ligatures et signes diacritiques. Ce nombre augmente rapidement avec le japonais et le chinois. En japonais, 2 136 kanji (caractères logographiques) sont considérés comme des caractères d'usage courant, conformément aux directives du ministère de l'Éducation. La norme JIS X 0208 , quant à elle, en définit 6 879. En chinois, les locuteurs natifs instruits reconnaissent environ 8 000 caractères. Par ailleurs, la norme GB 18030-2022 définit plus de 87 887 hanzi (caractères chinois) . Et nous n'avons pas encore abordé l'encodage des émoticônes (emoji).
+
+En d'autres termes, il est essentiel que l'expéditeur et le destinataire utilisent le même encodage ; de plus, il nous faut un encodage capable de prendre en charge tous les caractères de toutes les langues. C'est ainsi qu'est né Unicode.
+
+Unicode est une norme universelle d'encodage de caractères. Elle attribue des points de code uniques aux caractères de tous les systèmes d'écriture modernes et anciens du monde. Unicode permet l'échange, le traitement et l'affichage de textes dans diverses langues. Autrement dit, il n'est pas nécessaire de choisir une norme d'encodage spécifique compatible avec la langue utilisée. De plus, cela facilite l'utilisation de différentes langues dans un même fichier ou message. Enfin, et surtout, comme il s'agit d'une norme universelle, l'encodage utilisé par l'auteur original n'a pas d'importance, puisqu'il utilise également Unicode.
+
+Unicode est une norme de jeu de caractères qui attribue un numéro unique à chaque caractère dans toutes les langues. Exemples :
+
+U+0041 = Latin « A »
+U+03A9 = Grec « Ω »
+U+3042 = Hiragana japonais « あ »
+Unicode 17.0 est actuellement la dernière version d' Unicode.(ouvre dans un nouvel onglet)Norme. Elle définit près de 157 000 caractères, dont près de 4 000 sont des séquences d’émojis.
+
+UTF-8, UTF-16 et UTF-32
+Comme vous rencontrerez les encodages UTF-8, UTF-16 et UTF-32, nous les aborderons brièvement sans les détailler. Il est important de savoir que l'UTF-8 est très répandu sur le web moderne. Il encode dynamiquement les caractères Unicode sur 1 à 4 octets. Autrement dit, le nombre d'octets est déterminé en fonction de la complexité du caractère. Les caractères ASCII (de Ω U+0000à Ω U+007F) utilisent exactement 1 octet, comme l'ASCII d'origine, garantissant ainsi une compatibilité ascendante parfaite. Les caractères non ASCII, comme Ω (Ω U+03A9), utilisent 2 octets, tandis que les caractères complexes ou les émojis, comme 🔥 (κ U+1F525), nécessitent 4 octets. Cette flexibilité nous permet de couvrir la norme Unicode sans gaspillage d'octets.
+
+L'UTF-16 adopte une approche différente : il utilise soit 2, soit 4 octets par caractère. Les caractères courants, comme la plupart des caractères latins, cyrilliques ou chinois (hanzi), tiennent sur 2 octets ; cependant, les caractères plus rares, comme les émojis ou les écritures anciennes, nécessitent une paire, c'est-à-dire deux unités de 16 bits totalisant 4 octets. Par exemple, la lettre Aest encodée comme ` <a> U+0041`, tandis que l'émoji 🔥 nécessite deux octets et est encodé comme `<a> U+D83D U+DD25`.
+
+Enfin, l'UTF-32 est le plus simple, mais aussi le plus gourmand en ressources ; chaque point de code Unicode utilise exactement 4 octets. Par exemple, ` \00` Aest encodé comme ` U+00000041\00` et `\01` comme `\00` U+0001F525.
+
+Explorons quelques autres exemples :
+
+龍 : L’un des caractères chinois qui apparaissent sur des distributions Linux controversées, comme Kali, est « 龍 », qui signifie « dragon ». En Unicode, il s’écrit 龍U+9F8Dou 龍U+00009F8D, selon qu’il s’agisse d’UTF-16 ou d’UTF-32.
+😊 : Ce smiley n'est rien de plus qu'un U+0001F60Asymbole UTF-32 pour un ordinateur ; c'est littéralement 0000 0000 0000 0001 1111 0110 0000 1010.
+ツ : La lettre japonaise « tsu » que certaines personnes utilisent comme un visage souriant dans certaines régions en dehors du Japon ; son code est U+30C4 ou U+000030C4 selon qu'il s'agisse d'UTF-16 ou d'UTF-32.
+ت est la lettre arabe « taa », et certaines personnes l'utilisent comme un smiley en dehors du monde arabe ; elle ressemble beaucoup à un visage souriant. Du point de vue Unicode, c'est ت U+062A.
+♞ : Le cavalier noir aux échecs utilise l'Unicode U+265E; autrement dit, l'ordinateur lit 0010 0110 0101 1110et vous affiche un cavalier noir grâce à l'Unicode.
+Nous avons créé un site statique pour vous aider à rechercher des caractères et à découvrir les nouveaux caractères disponibles dans la plupart des polices standard.
+
+gobuster dir --url http://www.onlineshop.thm/ -w /usr/share/wordlists/dirbuster/directory-list.txt
+
+hydra -l admin -P passlist.txt www.online.thm http-post-form "/login:username=^USER^&password=^PASS^:F:incorrect" -V
+
+hydra -l admin -P passlist.txt www.onlineshop.thm http-post-form "/login:username=^USER^&password=^PASS^:F=incorrect" -V
 
 
 
