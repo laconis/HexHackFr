@@ -3,67 +3,18 @@
 
 document.write(`
   
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-<body>
+    <meta charset="UTF-8">
+    <title>HexHackFr</title>
 
-<header>
-<div id="headerMaster">HexHackFr</div>
-</header>
+    <!-- Icônes FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-
-<div id="menu">
-<ul>
-<li>Projets</li>
-<li>Code</li>
-<li>Securité</li>
-<li>Nous Contacter</li>
-<li>dazdazda</li>
-<li>Item 1</li>
-</ul>
-</div>
-
-
-<div id="content">
-
-<div class="art left">
-
-<div class="MasterProject">Projets</div>
-
-<div id="listProject">
-
-<div class="ProjectItem">
-<div class="titleProject">NicoFlix</div>
-<div class="DescriptionProject">Gestion de vidéos (Blazor C#) <a href="#">Voir le lien Github</a></div>
-</div>
-
-<div class="ProjectItem">
-<div class="titleProject">NicoFlix</div>
-<div class="DescriptionProject">Gestion de vidéos (Blazor C#) <a href="#">Voir le lien Github</a></div>
-</div>
-
-<div class="ProjectItem">
-<div class="titleProject">NicoFlix</div>
-<div class="DescriptionProject">Gestion de vidéos (Blazor C#) <button class="btn githubLink">Voir le lien Github</button></div>
-</div>
-
-</div> <!-- Fin ListProject -->
-</div>  <!-- Fin  MasterProject -->
-</div> <!-- Fin art -->
-
-
-<div class="art right">Code</div>
-<div class="art left">Securité</div>
-<div class="art right">Contact</div>
-<div class="art left">A voir</div>
-
-</div>  <!-- content-->
-
-</body>
-
-<style>
-
-     * {
+    <style>
+        /* RESET */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -71,94 +22,316 @@ document.write(`
 
         :root {
             --bg: #141414;
-            --bg-soft: #1b1b1b;
-            --bg-card: #202020;
-            --bg-card-2: #2b2b2b;
+            --glass: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.18);
             --text: #ffffff;
-            --text-soft: #b3b3b3;
-            --red: #e50914;
-            --red-hover: #ff1f2d;
-            --yellow: #f5c400;
-            --border: rgba(255, 255, 255, 0.08);
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            --text-soft: #cccccc;
+            --accent: #f5c400;
         }
-
 
         body {
-            background:
-                radial-gradient(circle at top left, rgba(229, 9, 20, 0.10), transparent 22%),
-                linear-gradient(to bottom, #0f0f0f, #141414 180px);
+            background: var(--bg);
             color: var(--text);
             font-family: Arial, Helvetica, sans-serif;
-            min-height: 100vh;
         }
 
-       header{
- 			text-align:center;
-			line-height:75px;
-			height:75px;
-			margin-bottom:25px;
-	   }
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1b1b1b;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-#menu{
+        /* NAVBAR */
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
 
-color:white;
-font-weight:bold;
-margin:auto;
-width:1400px;
-margin-bottom:25px;
-}
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding-bottom: 5px;
+        }
 
-#menu li{
-display:inline-block;
-opacity:0.8;
-width:220px;
-text-align:center;
-height:40px;
-}
+        nav ul li a:hover {
+            border-bottom: 2px solid white;
+        }
 
-#menu li:hover{
-display:inline-block;
-opacity:1;
-width:220px;
-cursor:pointer;
-border-bottom:2px solid white;
-}
+        /* MEGA MENU AWS-LIKE */
+        .mega-dropdown {
+            position: relative;
+        }
 
+        .mega-dropdown > a {
+            padding: 8px 5px;
+            display: inline-block;
+        }
 
-#content{
-min-height:200px;
-margin:auto;
-width:1600px;
+        .mega-menu {
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 50px;
+            width: 100vw;
+            padding: 40px;
 
-}
+            background: var(--glass);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.55);
 
-.art{
-width:600px;
-height:400px;
-border-radius:10px;
-padding:25px;
-margin:25px;
-float:left;
-background-color:#1A1A1A;
-}
+            transform: translateY(-20px);
+            transition: all 0.35s ease;
+            z-index: 999;
+        }
 
-.art{cursor:pointer;}
+        .mega-dropdown:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
 
-.githubLink{}
-.left{float:left;}
-.right{float:right;}
-.socialItem{color:white;}
-.ProjectItem{height:40px;}
-.titleProject{text-align:center;}
-.DescriptionProject{color:#f0f0f0;}
-.githubLink{background-color:#f0f0f0;box-shadow: 0 4px 10px rgba(0,0,0,0.25);height:40px;border-radius:10px;}
+        .mega-layout {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 40px;
+        }
 
-</style>
+        /* COLONNE GAUCHE : catégories */
+        .mega-left {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
+        .mega-left a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.85;
+        }
+
+        .mega-left a:hover {
+            background: rgba(255,255,255,0.12);
+            opacity: 1;
+        }
+
+        /* COLONNE DROITE : cartes avec images (AWS-like) */
+        .mega-right {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .mega-card {
+            background: rgba(0,0,0,0.35);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: 0.25s;
+        }
+
+        .mega-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+            border-color: rgba(255,255,255,0.25);
+            cursor: pointer;
+        }
+
+        .mega-card img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .mega-card-body {
+            padding: 14px 16px 16px;
+        }
+
+        .mega-card-body h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mega-card-body h3 i {
+            color: var(--accent);
+        }
+
+        .mega-card-body p {
+            font-size: 13px;
+            color: var(--text-soft);
+            line-height: 1.4;
+        }
+
+        /* CONTENT */
+        #content {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding-top: 40px;
+        }
+
+        .art {
+            width: 45%;
+            min-width: 300px;
+            background: #1f1f1f;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .mega-layout {
+                grid-template-columns: 1fr;
+            }
+            .mega-right {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .mega-right {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">HexHackFr</div>
+
+    <nav>
+        <ul>
+            <li><a href="#">Projets</a></li>
+            <li><a href="#">Code</a></li>
+
+            <!-- MEGA MENU STYLE AWS (IMAGES + CARTES) -->
+            <li class="mega-dropdown">
+                <a href="#">Sécurité ▼</a>
+
+                <div class="mega-menu">
+                    <div class="mega-layout">
+
+                        <!-- COLONNE GAUCHE : catégories -->
+                        <div class="mega-left">
+                            <a href="#"><i class="fa-solid fa-shield-halved"></i> Pentest</a>
+                            <a href="#"><i class="fa-solid fa-bug"></i> Reverse Engineering</a>
+                            <a href="#"><i class="fa-solid fa-network-wired"></i> Réseau</a>
+                            <a href="#"><i class="fa-solid fa-screwdriver-wrench"></i> Outils</a>
+                        </div>
+
+                        <!-- COLONNE DROITE : cartes avec images -->
+                        <div class="mega-right">
+
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pentest">
+                                <div class="mega-card-body">
+                                    <h3><i class="fa-solid fa-shield-halved"></i>Pentest Web</h3>
+                                    <p>Tests d’intrusion sur applications web, OWASP Top 10, auth, injections, XSS, etc.</p>
+                                </div>
+                            </div>
+
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/5380645/pexels-photo-5380645.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Infra">
+                                <div class="mega-card-body">
+                                    <h3><i class="fa-solid fa-server"></i>Infra & Réseau</h3>
+                                    <p>Audit d’infrastructure, segmentation, firewall, VPN, exposition services.</p>
+                                </div>
+                            </div>
+
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/5380647/pexels-photo-5380647.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Reverse">
+                                <div class="mega-card-body">
+                                    <h3><i class="fa-solid fa-bug"></i>Reverse Engineering</h3>
+                                    <p>Analyse binaire, malwares, obfuscation, cracking, instrumentation.</p>
+                                </div>
+                            </div>
+
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/5380615/pexels-photo-5380615.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Réseau">
+                                <div class="mega-card-body">
+                                    <h3><i class="fa-solid fa-network-wired"></i>Réseau & Protocoles</h3>
+                                    <p>Sniffing, MITM, TLS, DNS, protocoles custom, détection d’anomalies.</p>
+                                </div>
+                            </div>
+
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Outils">
+                                <div class="mega-card-body">
+                                    <h3><i class="fa-solid fa-screwdriver-wrench"></i>Outils & Automation</h3>
+                                    <p>Nmap, BurpSuite, Metasploit, scripts custom, CI/CD sécurité.</p>
+                                </div>
+                            </div>
+
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/5380611/pexels-photo-5380611.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Reporting">
+                                <div class="mega-card-body">
+                                    <h3><i class="fa-solid fa-file-pen"></i>Reporting & Remédiation</h3>
+                                    <p>Rapports détaillés, priorisation, plans d’action, accompagnement équipes.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+
+            <li><a href="#">Nous Contacter</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div id="content">
+
+    <div class="art">
+        <h2>Projets</h2>
+        <p>Liste des projets à venir…</p>
+    </div>
+
+    <div class="art">
+        <h2>Code</h2>
+        <p>Section code…</p>
+    </div>
+
+</div>
+
+</body>
 </html>
-
 
      `);
 
