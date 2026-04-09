@@ -1,43 +1,63 @@
 
+
+
 document.write(`
   
 <html>
 <head>
 <body>
 
-<header>HexHackFr
-<div id="social">
-<a href="#" class="right socialItem">linkedlin</a>
-<a href="#" class="right socialItem">Twitter</a>
+<header>
+<div id="headerMaster">HexHackFr</div>
 </header>
 
-<div id="menu">
 
+<div id="menu">
 <ul>
 <li>Projets</li>
 <li>Code</li>
 <li>Securité</li>
-<li>Contact</li>
-<li>Item 1</li>
+<li>Nous Contacter</li>
+<li>dazdazda</li>
 <li>Item 1</li>
 </ul>
-
 </div>
 
 
 <div id="content">
 
-<div class="art left">Projets</div>
+<div class="art left">
+
+<div class="MasterProject">Projets</div>
+
+<div id="listProject">
+
+<div class="ProjectItem">
+<div class="titleProject">NicoFlix</div>
+<div class="DescriptionProject">Gestion de vidéos (Blazor C#) <a href="#">Voir le lien Github</a></div>
+</div>
+
+<div class="ProjectItem">
+<div class="titleProject">NicoFlix</div>
+<div class="DescriptionProject">Gestion de vidéos (Blazor C#) <a href="#">Voir le lien Github</a></div>
+</div>
+
+<div class="ProjectItem">
+<div class="titleProject">NicoFlix</div>
+<div class="DescriptionProject">Gestion de vidéos (Blazor C#) <button class="btn githubLink">Voir le lien Github</button></div>
+</div>
+
+</div> <!-- Fin ListProject -->
+</div>  <!-- Fin  MasterProject -->
+</div> <!-- Fin art -->
+
+
 <div class="art right">Code</div>
 <div class="art left">Securité</div>
 <div class="art right">Contact</div>
 <div class="art left">A voir</div>
 
-
-</div>
-
-
-
+</div>  <!-- content-->
 
 </body>
 
@@ -109,9 +129,9 @@ border-bottom:2px solid white;
 
 #content{
 min-height:200px;
-
 margin:auto;
-width:1400px;
+width:1600px;
+
 }
 
 .art{
@@ -124,16 +144,17 @@ float:left;
 background-color:#1A1A1A;
 }
 
-.art{
-cursor:pointer;
-}
+.art{cursor:pointer;}
 
-
+.githubLink{}
 .left{float:left;}
 .right{float:right;}
-
-
 .socialItem{color:white;}
+.ProjectItem{height:40px;}
+.titleProject{text-align:center;}
+.DescriptionProject{color:#f0f0f0;}
+.githubLink{background-color:#f0f0f0;box-shadow: 0 4px 10px rgba(0,0,0,0.25);height:40px;border-radius:10px;}
+
 </style>
 
 </html>
