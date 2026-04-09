@@ -1,24 +1,16 @@
 
-
-
 document.write(`
-  
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>HexHackFr</title>
 
-    <!-- Icônes FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        /* RESET */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --bg: #141414;
@@ -35,7 +27,6 @@ document.write(`
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        /* HEADER */
         header {
             width: 100%;
             padding: 15px 40px;
@@ -48,12 +39,8 @@ document.write(`
             z-index: 1000;
         }
 
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-        }
+        .logo { font-size: 28px; font-weight: bold; }
 
-        /* NAVBAR */
         nav ul {
             list-style: none;
             display: flex;
@@ -67,36 +54,24 @@ document.write(`
             padding-bottom: 5px;
         }
 
-        nav ul li a:hover {
-            border-bottom: 2px solid white;
-        }
+        nav ul li a:hover { border-bottom: 2px solid white; }
 
-        /* MEGA MENU AWS-LIKE */
-        .mega-dropdown {
-            position: relative;
-        }
-
-        .mega-dropdown > a {
-            padding: 8px 5px;
-            display: inline-block;
-        }
+        /* MEGA MENU */
+        .mega-dropdown { position: relative; }
 
         .mega-menu {
-            display: block;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            padding: 40px 0;
+
             opacity: 0;
             visibility: hidden;
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%, -20px);
-            top: 50px;
-            width: 100vw;
-            padding: 40px;
 
             background: var(--glass);
             backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 10px 35px rgba(0,0,0,0.55);
 
             transform: translateY(-20px);
             transition: all 0.35s ease;
@@ -110,14 +85,17 @@ document.write(`
         }
 
         .mega-layout {
-            max-width: 1400px;
-            margin: auto;
+            max-width: 1300px;
+            margin-left: 20px;
+            margin-right: auto;
+            padding: 0 40px;
+
             display: grid;
             grid-template-columns: 260px 1fr;
             gap: 40px;
         }
 
-        /* COLONNE GAUCHE : catégories */
+        /* COLONNE GAUCHE */
         .mega-left {
             display: flex;
             flex-direction: column;
@@ -133,21 +111,41 @@ document.write(`
             display: flex;
             align-items: center;
             gap: 10px;
-            opacity: 0.85;
         }
 
         .mega-left a:hover {
             background: rgba(255,255,255,0.12);
-            opacity: 1;
         }
 
-        /* COLONNE DROITE : cartes avec images (AWS-like) */
-        .mega-right {
-            display: grid;
+        /* SOUS-MENUS (cachés par défaut) */
+        .submenu {
+            display: none;
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
 
+        /* Affichage du bon sous-menu */
+        .mega-left a[data-target="pentest"]:hover ~ .submenu#pentest,
+        .submenu#pentest:hover {
+            display: grid;
+        }
+
+        .mega-left a[data-target="reverse"]:hover ~ .submenu#reverse,
+        .submenu#reverse:hover {
+            display: grid;
+        }
+
+        .mega-left a[data-target="reseau"]:hover ~ .submenu#reseau,
+        .submenu#reseau:hover {
+            display: grid;
+        }
+
+        .mega-left a[data-target="outils"]:hover ~ .submenu#outils,
+        .submenu#outils:hover {
+            display: grid;
+        }
+
+        /* CARTES */
         .mega-card {
             background: rgba(0,0,0,0.35);
             border-radius: 14px;
@@ -160,14 +158,12 @@ document.write(`
             transform: translateY(-4px);
             box-shadow: 0 12px 30px rgba(0,0,0,0.6);
             border-color: rgba(255,255,255,0.25);
-            cursor: pointer;
         }
 
         .mega-card img {
             width: 100%;
             height: 110px;
             object-fit: cover;
-            display: block;
         }
 
         .mega-card-body {
@@ -182,50 +178,18 @@ document.write(`
             gap: 8px;
         }
 
-        .mega-card-body h3 i {
-            color: var(--accent);
-        }
+        .mega-card-body h3 i { color: var(--accent); }
 
         .mega-card-body p {
             font-size: 13px;
             color: var(--text-soft);
-            line-height: 1.4;
         }
 
-        /* CONTENT */
         #content {
             width: 90%;
             max-width: 1200px;
             margin: auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
             padding-top: 40px;
-        }
-
-        .art {
-            width: 45%;
-            min-width: 300px;
-            background: #1f1f1f;
-            padding: 25px;
-            border-radius: 10px;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1100px) {
-            .mega-layout {
-                grid-template-columns: 1fr;
-            }
-            .mega-right {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 700px) {
-            .mega-right {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -240,72 +204,123 @@ document.write(`
             <li><a href="#">Projets</a></li>
             <li><a href="#">Code</a></li>
 
-            <!-- MEGA MENU STYLE AWS (IMAGES + CARTES) -->
             <li class="mega-dropdown">
                 <a href="#">Sécurité ▼</a>
 
                 <div class="mega-menu">
                     <div class="mega-layout">
 
-                        <!-- COLONNE GAUCHE : catégories -->
+                        <!-- COLONNE GAUCHE -->
                         <div class="mega-left">
-                            <a href="#"><i class="fa-solid fa-shield-halved"></i> Pentest</a>
-                            <a href="#"><i class="fa-solid fa-bug"></i> Reverse Engineering</a>
-                            <a href="#"><i class="fa-solid fa-network-wired"></i> Réseau</a>
-                            <a href="#"><i class="fa-solid fa-screwdriver-wrench"></i> Outils</a>
+                            <a data-target="pentest"><i class="fa-solid fa-shield-halved"></i> Pentest</a>
+                            <a data-target="reverse"><i class="fa-solid fa-bug"></i> Reverse Engineering</a>
+                            <a data-target="reseau"><i class="fa-solid fa-network-wired"></i> Réseau</a>
+                            <a data-target="outils"><i class="fa-solid fa-screwdriver-wrench"></i> Outils</a>
                         </div>
 
-                        <!-- COLONNE DROITE : cartes avec images -->
-                        <div class="mega-right">
-
+                        <!-- SOUS-MENUS -->
+                        <div class="submenu" id="pentest">
                             <div class="mega-card">
-                                <img src="https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pentest">
+                                <img src="https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg">
                                 <div class="mega-card-body">
-                                    <h3><i class="fa-solid fa-shield-halved"></i>Pentest Web</h3>
-                                    <p>Tests d’intrusion sur applications web, OWASP Top 10, auth, injections, XSS, etc.</p>
+                                    <h3>Pentest Web</h3>
+                                    <p>OWASP, injections, auth, XSS…</p>
                                 </div>
                             </div>
 
                             <div class="mega-card">
-                                <img src="https://images.pexels.com/photos/5380645/pexels-photo-5380645.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Infra">
+                                <img src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg">
                                 <div class="mega-card-body">
-                                    <h3><i class="fa-solid fa-server"></i>Infra & Réseau</h3>
-                                    <p>Audit d’infrastructure, segmentation, firewall, VPN, exposition services.</p>
+                                    <h3>Pentest Infra</h3>
+                                    <p>AD, réseaux, segmentation…</p>
                                 </div>
                             </div>
 
                             <div class="mega-card">
-                                <img src="https://images.pexels.com/photos/5380647/pexels-photo-5380647.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Reverse">
+                                <img src="https://images.pexels.com/photos/5380611/pexels-photo-5380611.jpeg">
                                 <div class="mega-card-body">
-                                    <h3><i class="fa-solid fa-bug"></i>Reverse Engineering</h3>
-                                    <p>Analyse binaire, malwares, obfuscation, cracking, instrumentation.</p>
+                                    <h3>Post-Exploitation</h3>
+                                    <p>Pivoting, persistence…</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="submenu" id="reverse">
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/5380647/pexels-photo-5380647.jpeg">
+                                <div class="mega-card-body">
+                                    <h3>Analyse Binaire</h3>
+                                    <p>IDA, Ghidra, radare2…</p>
                                 </div>
                             </div>
 
                             <div class="mega-card">
-                                <img src="https://images.pexels.com/photos/5380615/pexels-photo-5380615.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Réseau">
+                                <img src="https://images.pexels.com/photos/5380615/pexels-photo-5380615.jpeg">
                                 <div class="mega-card-body">
-                                    <h3><i class="fa-solid fa-network-wired"></i>Réseau & Protocoles</h3>
-                                    <p>Sniffing, MITM, TLS, DNS, protocoles custom, détection d’anomalies.</p>
+                                    <h3>Malwares</h3>
+                                    <p>Static & dynamic analysis.</p>
                                 </div>
                             </div>
 
                             <div class="mega-card">
-                                <img src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Outils">
+                                <img src="https://images.pexels.com/photos/5380645/pexels-photo-5380645.jpeg">
                                 <div class="mega-card-body">
-                                    <h3><i class="fa-solid fa-screwdriver-wrench"></i>Outils & Automation</h3>
-                                    <p>Nmap, BurpSuite, Metasploit, scripts custom, CI/CD sécurité.</p>
+                                    <h3>Cracking</h3>
+                                    <p>Déobfuscation, patching…</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="submenu" id="reseau">
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/5380615/pexels-photo-5380615.jpeg">
+                                <div class="mega-card-body">
+                                    <h3>Protocoles</h3>
+                                    <p>TCP/IP, DNS, TLS…</p>
                                 </div>
                             </div>
 
                             <div class="mega-card">
-                                <img src="https://images.pexels.com/photos/5380611/pexels-photo-5380611.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Reporting">
+                                <img src="https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg">
                                 <div class="mega-card-body">
-                                    <h3><i class="fa-solid fa-file-pen"></i>Reporting & Remédiation</h3>
-                                    <p>Rapports détaillés, priorisation, plans d’action, accompagnement équipes.</p>
+                                    <h3>MITM</h3>
+                                    <p>ARP spoofing, SSL stripping…</p>
                                 </div>
                             </div>
 
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg">
+                                <div class="mega-card-body">
+                                    <h3>Firewall</h3>
+                                    <p>Bypass, IDS/IPS…</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="submenu" id="outils">
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/5380647/pexels-photo-5380647.jpeg">
+                                <div class="mega-card-body">
+                                    <h3>Nmap</h3>
+                                    <p>Scan réseau avancé.</p>
+                                </div>
+                            </div>
+
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/5380645/pexels-photo-5380645.jpeg">
+                                <div class="mega-card-body">
+                                    <h3>BurpSuite</h3>
+                                    <p>Proxy, scanner, repeater…</p>
+                                </div>
+                            </div>
+
+                            <div class="mega-card">
+                                <img src="https://images.pexels.com/photos/5380611/pexels-photo-5380611.jpeg">
+                                <div class="mega-card-body">
+                                    <h3>Metasploit</h3>
+                                    <p>Framework d’exploitation.</p>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -318,22 +333,10 @@ document.write(`
 </header>
 
 <div id="content">
-
-    <div class="art">
-        <h2>Projets</h2>
-        <p>Liste des projets à venir…</p>
-    </div>
-
-    <div class="art">
-        <h2>Code</h2>
-        <p>Section code…</p>
-    </div>
-
+    <h2>Bienvenue sur HexHackFr</h2>
 </div>
 
 </body>
 </html>
 
-     `);
-
-
+`);
